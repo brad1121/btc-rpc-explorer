@@ -36,5 +36,38 @@ Live demo available at:
 
 ## Run via Docker
 
-1. `docker build -t btc-rpc-explorer .`
-2. `docker run -p 3002:3002 -it btc-rpc-explorer`
+Pull from Docker Hub:
+
+```sh
+docker run -p 3002:3002 brad1121/bsv-explorer:latest
+```
+
+Or build locally:
+
+```sh
+docker build -t bsv-explorer .
+docker run -p 3002:3002 -it bsv-explorer
+```
+
+### Configuration
+
+Pass RPC credentials via environment variables:
+
+| Variable | Default | Description |
+|---|---|---|
+| `BTCEXP_HOST` | `127.0.0.1` | Interface to bind |
+| `BTCEXP_PORT` | `3002` | Port to listen on |
+| `BTCEXP_BITCOIND_HOST` | `127.0.0.1` | Bitcoin node RPC host |
+| `BTCEXP_BITCOIND_PORT` | `8332` | Bitcoin node RPC port |
+| `BTCEXP_BITCOIND_USER` | *(none)* | RPC username |
+| `BTCEXP_BITCOIND_PASS` | *(none)* | RPC password |
+
+Example:
+
+```sh
+docker run -p 3002:3002 \
+  -e BTCEXP_BITCOIND_HOST=192.168.1.10 \
+  -e BTCEXP_BITCOIND_USER=rpcuser \
+  -e BTCEXP_BITCOIND_PASS=rpcpass \
+  brad1121/bsv-explorer:latest
+```
